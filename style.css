@@ -1,6 +1,7 @@
 body {
 	height: 100%;
 	background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+	margin-top: 3rem;
 }
 header {
 	display: flex;
@@ -24,17 +25,20 @@ header {
 	height: 100%;
 	padding: 2rem;
 	display: grid;
-	grid-template-columns: repeat(4, 1fr);
+	grid-template-columns: repeat(4, 1fr); /* Change to 4 columns instead of 2 */
 	gap: 2rem;
 	min-height: calc(100vh - 150px);
+	margin-left: 5rem; /* Reduced margin to fit 4 widgets */
+	margin-right: 5rem; /* Reduced margin to fit 4 widgets */
 }
 
 #name {
-	grid-column: 1 / -1;
+	grid-column: 1 / -1; /* This makes name span all 4 columns */
 	text-align: center;
 	padding: 1rem;
 	border-radius: 15px;
 	height: 100px;
+	font-size: larger;
 }
 
 .dashboard-widget {
@@ -43,41 +47,13 @@ header {
 	border-radius: 15px;
 	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 	transition: transform 0.2s ease;
-	max-height: 400px;
+	height: 400px; /* Fixed height instead of max-height */
+	background-color: rgba(255, 255, 255, 0.8);
+	box-sizing: border-box;
 }
 
 .dashboard-widget:hover {
 	transform: translateY(-5px);
-}
-
-#notes-container {
-	min-height: 300px;
-	background: #ffffff;
-	border-radius: 15px;
-	padding: 1.5rem;
-	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	position: relative;
-}
-
-#user-notes {
-	width: 100%;
-	height: 100%;
-	border: 0;
-	padding: 1rem;
-	font-size: 1rem;
-	box-sizing: border-box;
-	display: flex;
-	margin-top: 5rem;
-	margin-bottom: 3rem;
-}
-
-#user-notes:focus {
-	outline: none;
-	border-color: #7c4dff;
-	box-shadow: 0 0 0 3px rgba(124, 77, 255, 0.1);
 }
 
 #editableName {
@@ -97,4 +73,216 @@ header {
 	margin-bottom: 1rem;
 	position: absolute;
 	top: 0;
+}
+
+#weather-widget {
+	background: linear-gradient(
+		135deg,
+		rgba(107, 115, 255, 0.8) 0%,
+		rgba(0, 13, 255, 0.8) 100%
+	);
+	color: white;
+}
+
+.weather-content {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+	margin-top: 2rem;
+}
+
+.weather-title {
+	font-size: 1.5rem;
+	margin: 0;
+	text-align: center;
+	color: #ffffff;
+}
+
+.weather-info {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 1rem 0;
+}
+
+.temp-container {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+	flex-shrink: 1;
+}
+
+.temperature {
+	font-size: 3rem;
+	font-weight: bold;
+}
+
+.description {
+	font-size: 1.2rem;
+	text-transform: capitalize;
+}
+
+.weather-icon {
+	flex-shrink: 2;
+}
+
+.weather-details {
+	display: flex;
+	justify-content: space-around;
+	padding: 1rem 0;
+	border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.detail {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 0.5rem;
+}
+
+.label {
+	font-size: 0.9rem;
+	opacity: 0.9;
+}
+
+.value {
+	font-size: 1.1rem;
+	font-weight: bold;
+}
+
+.api-form {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+	padding: 1rem;
+}
+
+.api-form input {
+	padding: 0.5rem;
+	border: 1px solid rgba(255, 255, 255, 0.2);
+	border-radius: 5px;
+	background: rgba(255, 255, 255, 0.1);
+	color: white;
+}
+
+.api-form input::placeholder {
+	color: rgba(255, 255, 255, 0.7);
+}
+
+.api-form button {
+	padding: 0.5rem 1rem;
+	border: none;
+	border-radius: 5px;
+	background: white;
+	color: #000dff;
+	cursor: pointer;
+	font-weight: bold;
+	transition: transform 0.2s ease;
+}
+
+.api-form button:hover {
+	transform: translateY(-2px);
+}
+
+/* notes app */
+.notes-content {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+}
+#notes-container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+}
+
+#user-notes {
+	width: 100%;
+	height: 100%;
+	border: 0;
+	padding: 1rem;
+	font-size: 1rem;
+	box-sizing: border-box;
+	display: flex;
+	margin-top: 2rem;
+	margin-bottom: 1rem;
+}
+
+#user-notes:focus {
+	outline: none;
+	border-color: #7c4dff;
+	box-shadow: 0 0 0 3px rgba(124, 77, 255, 0.1);
+}
+#clear-notes {
+	padding: 0.5rem 1rem;
+	border: none;
+	border-radius: 5px;
+	background: #ff6b6b;
+	color: white;
+	cursor: pointer;
+	font-weight: bold;
+	transition: transform 0.2s ease;
+}
+
+#clear-notes:hover {
+	transform: translateY(-2px);
+	background: #ff5252;
+}
+
+#widget-3 {
+	height: 400px;
+	min-height: unset;
+	padding: 0;
+	overflow: hidden;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	box-sizing: border-box;
+	background: rgba(31, 36, 52, 0.8); /* Added transparent background */
+}
+
+.livecoinwatch-widget-3 {
+	width: 100% !important;
+	height: 400px !important;
+	min-height: unset !important;
+	padding: 0 !important;
+	margin: 0 !important;
+	background: transparent !important; /* Make widget background transparent */
+}
+
+#refreshBackground {
+	position: fixed;
+	bottom: 20px;
+	right: 20px;
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	background: rgba(255, 255, 255, 0.8);
+	border: none;
+	cursor: pointer;
+	font-size: 1.2rem;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+	transition: transform 0.2s ease;
+}
+
+#refreshBackground:hover {
+	transform: rotate(180deg);
+	background: rgba(255, 255, 255, 0.9);
+}
+
+@media screen and (max-width: 1000px) {
+	#content {
+		grid-template-columns: 1fr;
+		margin-left: 2rem;
+		margin-right: 2rem;
+	}
+
+	.dashboard-widget {
+		width: 100%;
+		min-width: 300px;
+		height: 400px;
+	}
 }
