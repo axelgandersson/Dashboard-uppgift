@@ -199,39 +199,98 @@ function bookMarks() {
 	const container = document.getElementById("linklist");
 	let links = document.createElement("div");
 	links.id = "links";
-	innerHTML = `<h2>Bookmarks</h2>`;
+	links.innerHTML = `<h2>Bookmarks</h2>`;
+
 	const linkInput = document.createElement("input");
 	linkInput.type = "text";
 	linkInput.placeholder = "Enter a URL";
+
 	const addButton = document.createElement("button");
 	addButton.innerText = "Add Link";
+
+	// Load existing bookmarks from localStorage
+	const savedLinks = JSON.parse(localStorage.getItem("bookmarks")) || [];
+
+	// Helper function to format URL
+	const formatUrl = (url) => {
+		if (!url.startsWith("http://") && !url.startsWith("https://")) {
+			return "https://" + url;
+		}
+		return url;
+	};
+
+	// Helper function to get favicon
+	const getFaviconUrl = (formattedUrl) => {
+		return `https://www.google.com/s2/favicons?domain=${formattedUrl}&sz=32`;
+	};
+
+	// Modify the savedLinks.forEach section
+	savedLinks.forEach((url) => {
+		const formattedUrl = formatUrl(url);
+		const faviconUrl = getFaviconUrl(formattedUrl);
+		const linkItem = document.createElement("div");
+		linkItem.className = "bookmark-item";
+		linkItem.innerHTML = `
+			<button class="link-btn" onclick="window.open('${formattedUrl}', '_blank')">
+				<img src="${faviconUrl}" alt="favicon" class="favicon">
+				<span>${url}</span>
+			</button>
+			<button class="delete-btn" onclick="this.parentElement.remove(); updateStorage();">×</button>
+		`;
+		links.appendChild(linkItem);
+	});
+
+	// Function to update localStorage
+	window.updateStorage = () => {
+		const currentLinks = Array.from(
+			links.querySelectorAll(".bookmark-item .link-btn")
+		).map((btn) => btn.textContent);
+		localStorage.setItem("bookmarks", JSON.stringify(currentLinks));
+	};
+
+	// Update the addButton.onclick section to also include favicon
 	addButton.onclick = () => {
-		const url = linkInput.value;
+		const url = linkInput.value.trim();
 		if (url) {
+			const formattedUrl = formatUrl(url);
+			const faviconUrl = getFaviconUrl(url);
 			const linkItem = document.createElement("div");
-			linkItem.innerHTML = `<a href="${url}" target="_blank">${url}</a>`;
+			linkItem.className = "bookmark-item";
+			linkItem.innerHTML = `
+				<button class="link-btn" onclick="window.open('${formattedUrl}', '_blank')">
+					<img src="${faviconUrl}" alt="favicon" class="favicon">
+					<span>${url}</span>
+				</button>
+				<button class="delete-btn" onclick="this.parentElement.remove(); updateStorage();">×</button>
+			`;
 			links.appendChild(linkItem);
 			linkInput.value = "";
+			updateStorage();
 		}
 	};
+
+	// Add enter key support
+	linkInput.addEventListener("keypress", (e) => {
+		if (e.key === "Enter") {
+			addButton.click();
+		}
+	});
+
 	container.appendChild(links);
 	container.appendChild(linkInput);
 	container.appendChild(addButton);
 }
 
 async function getBackground() {
-	const x = document.getElementById("bgChange");
-	const url =
-		"https://pixabay.com/api/?key=49724404-63993e20843f7c4952db0c8ff&category=backgrounds&per_page=100";
-
+	const url = `https://pixabay.com/api/?${API_KEY}&category=backgrounds&per_page=100`;
 	try {
 		const response = await fetch(url);
 		const data = await response.json();
 
 		if (data.hits && data.hits.length > 0) {
 			// Get random image from results
-			const randomIndex = Math.floor(Math.random() * data.hits.length);
-			const imageUrl = data.hits[randomIndex].largeImageURL;
+			const axels = Math.floor(Math.random() * data.hits.length);
+			const imageUrl = data.hits[axels].largeImageURL;
 
 			// Create and set background image
 			document.body.style.backgroundImage = `url(${imageUrl})`;
@@ -239,7 +298,7 @@ async function getBackground() {
 			document.body.style.backgroundPosition = "center";
 			document.body.style.backgroundRepeat = "no-repeat";
 
-			// Create refresh button if it doesn't exist
+			// Create refresh button
 			let refreshBtn = document.getElementById("refreshBackground");
 			if (!refreshBtn) {
 				refreshBtn = document.createElement("button");

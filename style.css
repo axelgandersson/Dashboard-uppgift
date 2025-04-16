@@ -25,15 +25,15 @@ header {
 	height: 100%;
 	padding: 2rem;
 	display: grid;
-	grid-template-columns: repeat(4, 1fr); /* Change to 4 columns instead of 2 */
+	grid-template-columns: repeat(4, 1fr);
 	gap: 2rem;
 	min-height: calc(100vh - 150px);
-	margin-left: 5rem; /* Reduced margin to fit 4 widgets */
-	margin-right: 5rem; /* Reduced margin to fit 4 widgets */
+	margin-left: 5rem;
+	margin-right: 5rem;
 }
 
 #name {
-	grid-column: 1 / -1; /* This makes name span all 4 columns */
+	grid-column: 1 / -1;
 	text-align: center;
 	padding: 1rem;
 	border-radius: 15px;
@@ -47,7 +47,7 @@ header {
 	border-radius: 15px;
 	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 	transition: transform 0.2s ease;
-	height: 400px; /* Fixed height instead of max-height */
+	height: 400px;
 	background-color: rgba(255, 255, 255, 0.8);
 	box-sizing: border-box;
 }
@@ -63,7 +63,6 @@ header {
 }
 
 #editableName:hover {
-	background-color: #f0f0f0;
 	cursor: pointer;
 }
 
@@ -241,7 +240,7 @@ header {
 	align-items: center;
 	justify-content: center;
 	box-sizing: border-box;
-	background: rgba(31, 36, 52, 0.8); /* Added transparent background */
+	background: rgba(31, 36, 52, 0.8);
 }
 
 .livecoinwatch-widget-3 {
@@ -250,7 +249,30 @@ header {
 	min-height: unset !important;
 	padding: 0 !important;
 	margin: 0 !important;
-	background: transparent !important; /* Make widget background transparent */
+	background: transparent !important;
+}
+
+#links {
+	display: flex;
+	gap: 1rem;
+	align-items: center;
+	flex-direction: column;
+}
+.bookmark-item {
+	width: 100%;
+	padding: 0.5rem;
+	background: linear-gradient(
+		135deg,
+		rgba(107, 115, 255, 0.8) 0%,
+		rgba(0, 13, 255, 0.8) 100%
+	);
+	display: flex;
+	border-radius: 10px;
+	align-items: center;
+	gap: 0.5rem;
+	margin-left: 0;
+	padding-left: 0;
+	margin-bottom: 1rem;
 }
 
 #refreshBackground {
@@ -271,6 +293,48 @@ header {
 #refreshBackground:hover {
 	transform: rotate(180deg);
 	background: rgba(255, 255, 255, 0.9);
+}
+
+.link-btn {
+	background: none;
+	border: none;
+	color: white;
+	cursor: pointer;
+	padding: 0.5rem 1rem;
+	font-size: 1rem;
+	text-align: left;
+	flex-grow: 1;
+	transition: color 0.2s ease;
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+	padding: 0%;
+}
+
+.link-btn img {
+	position: relative;
+	left: 0;
+}
+
+.link-btn:hover {
+	color: #e0e0e0;
+}
+#links h2 {
+	color: #5c8a56;
+	margin: 0;
+}
+.favicon {
+	width: 2rem;
+	height: 2rem;
+	object-fit: contain;
+}
+
+.delete-btn {
+	display: none;
+}
+
+.delete-btn:hover {
+	display: block;
 }
 
 @media screen and (max-width: 1000px) {
