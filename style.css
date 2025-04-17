@@ -320,21 +320,13 @@ header {
 	color: #e0e0e0;
 }
 #links h2 {
-	color: #5c8a56;
+	color: #000000;
 	margin: 0;
 }
 .favicon {
 	width: 2rem;
 	height: 2rem;
 	object-fit: contain;
-}
-
-.delete-btn {
-	display: none;
-}
-
-.delete-btn:hover {
-	display: block;
 }
 
 @media screen and (max-width: 1000px) {
